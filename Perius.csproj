@@ -20,4 +20,12 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Mapping\" />
+    <None Remove="Models\Clientes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mapping\" />
+    <Folder Include="Models\Clientes\" />
+  </ItemGroup>
 </Project>

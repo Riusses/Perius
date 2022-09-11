@@ -22,7 +22,7 @@ namespace Perius.Controllers
             try
             {
                 string queryString = "SELECT IdCliente, Nombre FROM dbo.Clientes;";
-                using SqlConnection connection = new("Server=localhost;Database=periusdb;Trusted_Connection=True;");
+                using SqlConnection connection = new("Server=localhost,1433;Database=periusdb;User=sa;Password=12345678JE!");
                 SqlCommand command = new(queryString, connection);
                 connection.Open();
                 using SqlDataReader reader = command.ExecuteReader();
