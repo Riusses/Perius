@@ -6,6 +6,6 @@ namespace Perius.Models.Clientes
         public int IdTipoDireccion { set; get; }
         public int IdCliente { set; get; }
         public int IdCodigoPostal { set; get; }
-        public string? Direccion { set; get; }
+        public string Direccion { set; get; }
     }
 }
