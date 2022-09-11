@@ -15,7 +15,7 @@ namespace Perius.Models.Clientes
         public string Documento { get; set; }
         public DateTime FechaAlta { get; set; }
         public DateTime FechaBaja { get; set; }
-        public bool Activo { get; set; }            
+        public bool Activo { get; set; }
     }
 }
 
