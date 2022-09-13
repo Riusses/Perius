@@ -26,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mapping\" />
-    <Folder Include="Models\ViewModels\Clientes\" />
+    <Folder Include="Models\Clientes\" />
+    <Folder Include="Models\Repositories\" />
   </ItemGroup>
 </Project>
