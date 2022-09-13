@@ -1,4 +1,4 @@
-﻿using Perius.Models;
+﻿using Perius.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
