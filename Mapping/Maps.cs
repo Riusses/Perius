@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Perius.Models.Clientes;
+using Perius.Models.ViewModels.Clientes;
 
 namespace Perius.Mapping
 {

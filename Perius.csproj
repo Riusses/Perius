@@ -22,10 +22,10 @@
 
   <ItemGroup>
     <None Remove="Mapping\" />
-    <None Remove="Models\Clientes\" />
+    <None Remove="Models\ViewModel\Clientes\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mapping\" />
-    <Folder Include="Models\Clientes\" />
+    <Folder Include="Models\ViewModels\Clientes\" />
   </ItemGroup>
 </Project>
