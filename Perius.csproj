@@ -1,10 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\Clientes\**" />
+    <Content Remove="Models\Clientes\**" />
+    <EmbeddedResource Remove="Models\Clientes\**" />
+    <None Remove="Models\Clientes\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
@@ -26,7 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mapping\" />
-    <Folder Include="Models\Clientes\" />
     <Folder Include="Models\Repositories\" />
   </ItemGroup>
 </Project>
