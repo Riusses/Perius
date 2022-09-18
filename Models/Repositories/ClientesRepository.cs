@@ -7,9 +7,10 @@ namespace Perius.Models.Repositories
     {
         public ClientesRepository()
         {
+
         }
 
-        //public List<ClienteViewModel> ObtenerTablaClientes(DTParameter parametros) { 
+        //public List<ClienteViewModel> ObtenerTablaClientes(DTParameters parametros) { 
             
         //}
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Reflection;
 using Perius.Models.ViewModels.Clientes;
 
 namespace Perius.Mapping
@@ -8,12 +7,15 @@ namespace Perius.Mapping
     {
         public Maps()
         {
-
+        }
+        public Maps(string map, Type tipo, dynamic? lista)
+        {
+            MethodInfo mapFunction = tipo.GetMethod(map);
+            mapFunction.Invoke(this, lista);
         }
 
         #region Clientes
-
-        private IQueryable<ClienteViewModel> MappingClientes(List<dynamic> clientes)
+        public List<ClienteViewModel> MappingClientes(List<dynamic> clientes)
         {
             return clientes.Select(x => new ClienteViewModel
             {
@@ -26,9 +28,8 @@ namespace Perius.Mapping
                 FechaAlta = x.FechaAlta.Equals(DBNull.Value) ? DateTime.MinValue : (DateTime)x.FechaAlta,
                 FechaBaja = x.FechaBaja.Equals(DBNull.Value) ? DateTime.MinValue : (DateTime)x.FechaBaja,
                 Activo = x.Activo.Equals(DBNull.Value) ? false : (bool)x.Activo,
-            }).AsQueryable();
+            }).ToList();
         }
-
         #endregion
     }
 }

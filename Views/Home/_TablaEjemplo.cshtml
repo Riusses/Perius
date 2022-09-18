@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Perius.Models.ViewModels.Clientes.ClienteViewModel>
+
+<div class="col-sm-2 mb-5">
+    <label>Nombre:</label>
+    <input id="nombre" class="form-control" value="Jordi" />
+</div>
+
+<table id="dt-clientes">
+    @* Contenido cargado mediante script *@
+</table>
+
+<script>
+    $(document).ready(function () {
+        //TODO
+        $.fn.dataTable.ext.errMode = 'none';
+
+        $("#dt-clientes").DataTable({
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            ajax: {
+                url: "/Home/ObtenerTablaEjemplo",
+                type: "POST",
+                datatype: "json",
+                //data: function (data) {
+                //    debugger;
+                //    data.parametros.nombre = $("#nombre").val();
+                //    return JSON.stringify(data);
+                //}
+            },
+            columns: [
+                { data: '@Html.DisplayNameFor(model => model.IdCliente)', visible: false },
+                { data: '@Html.DisplayNameFor(model => model.IdTipoDocumento)', visible: false },
+                { data: '@Html.DisplayNameFor(model => model.Nombre)', title: "Nombre" },
+                { data: '@Html.DisplayNameFor(model => model.PrimerApellido)', title: "Pri. apellido" },
+                { data: '@Html.DisplayNameFor(model => model.SegundoApellido)', title: "Seg. apellido" },
+                { data: '@Html.DisplayNameFor(model => model.Documento)', title: "Documento" },
+                {
+                    data: '@Html.DisplayNameFor(model => model.FechaAlta)', title: "F. alta", render: function (data, type, row, meta) {
+                        return moment(data).format('DD/MM/YYYY hh:mm');
+                    }
+                },
+                {
+                    data: '@Html.DisplayNameFor(model => model.FechaBaja)', title: "F. baja", render: function (data, type, row, meta) {
+                        return moment(data).format('DD/MM/YYYY hh:mm');
+                    }
+                },
+                {
+                    data: '@Html.DisplayNameFor(model => model.Activo)', title: "Activo", render: function (data, type, row, meta) {
+                        return data == true ? 1 : 0;
+                    }
+                },
+            ]
+        });
+    });
+</script>
