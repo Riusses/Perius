@@ -11,6 +11,8 @@
     <Content Remove="Models\Clientes\**" />
     <EmbeddedResource Remove="Models\Clientes\**" />
     <None Remove="Models\Clientes\**" />
+    <Content Remove="wwwroot\lib\font-awesome\" />
+    <Content Remove="wwwroot\lib\font-awesome\bin\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,5 +41,7 @@
     <Folder Include="wwwroot\lib\datatables\dist\css\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
     <Folder Include="wwwroot\lib\momentjs\dist\" />
+    <Folder Include="wwwroot\lib\font-awesome\" />
+    <Folder Include="wwwroot\lib\font-awesome\bin\" />
   </ItemGroup>
 </Project>
