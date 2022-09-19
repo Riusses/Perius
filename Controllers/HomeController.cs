@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Perius.Models.Repositories;
 using Perius.Models.ViewModels;
 using Perius.Models.ViewModels.Clientes;
@@ -29,11 +27,10 @@ namespace Perius.Controllers
             return PartialView("_TablaEjemplo");
         }
 
-        //public JsonResult ObtenerTablaEjemplo(dynamic data)
         public JsonResult ObtenerTablaEjemplo()
         {
             List<ClienteViewModel> listaClientes = _repositorio.ObtenerClientes();
-            return Json(new { draw = 1, recordsFiltered = listaClientes.Count(), recordsTotal = listaClientes.Count(), data = listaClientes });
+            return Json(new { draw = 1, recordsFiltered = listaClientes.Count, recordsTotal = listaClientes.Count, data = listaClientes });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

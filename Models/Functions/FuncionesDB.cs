@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Perius.Models.ViewModels;
+using Perius.ComponentModels.CustomAttributes;
 
 namespace Perius.Models.Functions
 {
@@ -12,53 +13,62 @@ namespace Perius.Models.Functions
         public static SqlConnection ObtenerSqlConnection()
         {
             IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json", false, true);
-
-            IConfigurationRoot configuration = builder.Build();
-
-            SqlConnection connection = new(configuration.GetConnectionString("PeriusDatabase"));
-
-            return connection;
+            SqlConnection conexion = new(builder.Build().GetConnectionString("PeriusDatabase"));
+            return conexion;
         }
-
         public static void EjecutarStoredProcedure(ParametrosConsultaViewModel parametrosConsulta)
         {
-            /* STORED PROCEDURE */
-            string tipoConsulta = "EXEC ";
-
             using SqlConnection connection = ObtenerSqlConnection();
+            SqlCommand comando = new(parametrosConsulta.Consulta, connection)
+            {
+                CommandType = CommandType.StoredProcedure,
+                CommandTimeout = 300
+            };
 
-            SqlCommand command = new(tipoConsulta + parametrosConsulta.Consulta, connection);
+            SqlParameter? parametroOutput = new();
 
             if (parametrosConsulta.ParametrosEntrada != null)
             {
-                command.Parameters.Add("@ParametrosEntrada", SqlDbType.NVarChar, -1).Value = JsonConvert.SerializeObject(parametrosConsulta.ParametrosEntrada);
+                comando.Parameters.Add("@ParametrosEntrada", SqlDbType.NVarChar, -1).Value = JsonConvert.SerializeObject(parametrosConsulta.ParametrosEntrada);
+            };
+
+            if (parametrosConsulta.ParametrosSalida != null)
+            {
+                parametroOutput = new("@ParametrosSalida", SqlDbType.NVarChar, -1)
+                {
+                    Direction = ParameterDirection.Output
+                };
+
+                comando.Parameters.Add(parametroOutput);
             }
 
             connection.Open();
+            List<dynamic>? listaObjetoModelo = new();
 
-            // REFORZAR CONTRA BUGS Y FORMALIZAR
-            List<dynamic> listaObjetoModelo = new();
             try
             {
-                using SqlDataReader reader = command.ExecuteReader();
+                using SqlDataReader reader = comando.ExecuteReader();
                 while (reader.Read())
                 {
                     object? objetoModelo = Activator.CreateInstance(parametrosConsulta.Modelo);
-                    foreach (PropertyInfo prop in objetoModelo.GetType().GetProperties().Where<PropertyInfo>(prop => !Equals(reader[prop.Name], DBNull.Value)))
+                    IEnumerable<PropertyInfo> propiedades = objetoModelo.GetType().GetProperties()
+                                                                        .Where(propiedad => propiedad.GetCustomAttributes(typeof(SkipAditionalPropertyAttribute), true).Length == 0
+                                                                                            && !Equals(reader[propiedad.Name], DBNull.Value));
+                    foreach (PropertyInfo propiedad in propiedades)
                     {
-                        prop.SetValue(objetoModelo, reader[prop.Name], null);
+                        propiedad.SetValue(objetoModelo, reader[propiedad.Name], null);
                     }
 
                     listaObjetoModelo.Add(objetoModelo);
                 }
-
-                parametrosConsulta.Resultados = listaObjetoModelo;
             }
             catch
             {
-                // TODO: EMITIR MENSAJE A TABLA INTERNA
+                listaObjetoModelo = null;
             }
 
+            parametrosConsulta.ParametrosSalida = parametroOutput.Value == DBNull.Value ? null : parametroOutput.Value;
+            parametrosConsulta.Resultados = listaObjetoModelo;
             connection.Close();
         }
     }

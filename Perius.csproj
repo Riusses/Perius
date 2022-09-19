@@ -8,11 +8,14 @@
 
   <ItemGroup>
     <Compile Remove="Models\Clientes\**" />
+    <Compile Remove="wwwroot\lib\font-awesome\**" />
     <Content Remove="Models\Clientes\**" />
+    <Content Remove="wwwroot\lib\font-awesome\**" />
     <EmbeddedResource Remove="Models\Clientes\**" />
+    <EmbeddedResource Remove="wwwroot\lib\font-awesome\**" />
     <None Remove="Models\Clientes\**" />
+    <None Remove="wwwroot\lib\font-awesome\**" />
     <Content Remove="wwwroot\lib\font-awesome\" />
-    <Content Remove="wwwroot\lib\font-awesome\bin\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,12 +39,9 @@
     <None Remove="Models\ViewModel\Clientes\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Mapping\" />
     <Folder Include="wwwroot\lib\datatables\dist\js\" />
     <Folder Include="wwwroot\lib\datatables\dist\css\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
     <Folder Include="wwwroot\lib\momentjs\dist\" />
-    <Folder Include="wwwroot\lib\font-awesome\" />
-    <Folder Include="wwwroot\lib\font-awesome\bin\" />
   </ItemGroup>
 </Project>

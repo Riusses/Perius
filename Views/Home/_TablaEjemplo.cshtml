@@ -29,27 +29,19 @@
                 //}
             },
             columns: [
-                { data: '@Html.DisplayNameFor(model => model.IdCliente)', visible: false },
-                { data: '@Html.DisplayNameFor(model => model.IdTipoDocumento)', visible: false },
-                { data: '@Html.DisplayNameFor(model => model.Nombre)', title: "Nombre" },
-                { data: '@Html.DisplayNameFor(model => model.PrimerApellido)', title: "Pri. apellido" },
-                { data: '@Html.DisplayNameFor(model => model.SegundoApellido)', title: "Seg. apellido" },
-                { data: '@Html.DisplayNameFor(model => model.Documento)', title: "Documento" },
+                { data: "idCliente", visible: false },
+                { data: "idTipoDocumento", visible: false },
+                { data: "nombre", title: '@Html.DisplayNameFor(model => model.Nombre)', title: "Nombre" },
+                { data: "primerApellido", title: '@Html.DisplayNameFor(model => model.PrimerApellido)' },
+                { data: "segundoApellido", title: '@Html.DisplayNameFor(model => model.SegundoApellido)' },
+                { data: "documento", title: '@Html.DisplayNameFor(model => model.Documento)' },
+                { data: "fechaAltaToString", title: '@Html.DisplayNameFor(model => model.FechaAlta)' },
+                { data: "fechaBajaToString", title: '@Html.DisplayNameFor(model => model.FechaBaja)' },
                 {
-                    data: '@Html.DisplayNameFor(model => model.FechaAlta)', title: "F. alta", render: function (data, type, row, meta) {
-                        return moment(data).format('DD/MM/YYYY hh:mm');
-                    }
-                },
-                {
-                    data: '@Html.DisplayNameFor(model => model.FechaBaja)', title: "F. baja", render: function (data, type, row, meta) {
-                        return moment(data).format('DD/MM/YYYY hh:mm');
-                    }
-                },
-                {
-                    data: '@Html.DisplayNameFor(model => model.Activo)', title: "Activo", render: function (data, type, row, meta) {
+                    data: "activo", title: '@Html.DisplayNameFor(model => model.Activo)', render: function (data, type, row, meta) {
                         return data == true ? 1 : 0;
                     }
-                },
+                }
             ]
         });
     });

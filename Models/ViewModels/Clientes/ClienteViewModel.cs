@@ -1,27 +1,35 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using Perius.ComponentModels.CustomAttributes;
 
 namespace Perius.Models.ViewModels.Clientes
 {
     public class ClienteViewModel
     {
-        [Display(Name = "idCliente")]
+        [Key]
         public int IdCliente { get; set; }
-        [Display(Name = "idTipoDocumento")]
+        [Required]
         public int IdTipoDocumento { get; set; }
-        [Display(Name = "nombre")]
+        [Required]
         public string Nombre { get; set; }
-        [Display(Name = "primerApellido")]
+        [Required]
+        [DisplayName("Primer apellido")]
         public string PrimerApellido { get; set; }
-        [Display(Name = "segundoApellido")]
+        [DisplayName("Segundo apellido")]
         public string SegundoApellido { get; set; }
-        [Display(Name = "documento")]
+        [Required]
         public string Documento { get; set; }
-        [Display(Name = "fechaAlta")]
+        [Required]
+        [DisplayName("Fecha alta")]
         public DateTime FechaAlta { get; set; }
-        [Display(Name = "fechaBaja")]
+        [DisplayName("Fecha baja")]
         public DateTime FechaBaja { get; set; }
-        [Display(Name = "activo")]
         public bool Activo { get; set; }
+        // Propiedades adicionales
+        [SkipAditionalProperty]
+        public string FechaAltaToString => FechaAlta != DateTime.MinValue ? FechaAlta.ToString("g") : string.Empty;
+        [SkipAditionalProperty]
+        public string FechaBajaToString => FechaBaja != DateTime.MinValue ? FechaBaja.ToString("g") : string.Empty;
     }
 }
 
