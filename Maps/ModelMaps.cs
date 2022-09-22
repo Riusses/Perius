@@ -20,7 +20,7 @@ namespace Perius.Maps
                     SegundoApellido = x.SegundoApellido.Equals(DBNull.Value) ? string.Empty : (string)x.PrimerApellido,
                     Documento = x.Documento.Equals(DBNull.Value) ? string.Empty : (string)x.Documento,
                     FechaAlta = x.FechaAlta.Equals(DBNull.Value) ? DateTime.MinValue : (DateTime)x.FechaAlta,
-                    FechaBaja = x.FechaBaja.Equals(DBNull.Value) ? DateTime.MinValue : (DateTime)x.FechaBaja,
+                    FechaBaja = x.FechaBaja.Equals(DBNull.Value) ? null : (DateTime)x.FechaBaja,
                     Activo = x.Activo.Equals(DBNull.Value) ? false : (bool)x.Activo,
                 }).ToList();
             }
