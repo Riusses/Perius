@@ -15,7 +15,6 @@
     <EmbeddedResource Remove="wwwroot\lib\font-awesome\**" />
     <None Remove="Models\Clientes\**" />
     <None Remove="wwwroot\lib\font-awesome\**" />
-    <Content Remove="wwwroot\lib\font-awesome\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +42,5 @@
     <Folder Include="wwwroot\lib\datatables\dist\css\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
     <Folder Include="wwwroot\lib\momentjs\dist\" />
-    <Folder Include="wwwroot\lib\font-awesome\" />
   </ItemGroup>
 </Project>
