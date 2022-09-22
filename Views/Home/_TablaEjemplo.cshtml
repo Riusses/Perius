@@ -55,7 +55,10 @@
                 },
                 {
                     data: "activo", title: "@Html.DisplayNameFor(model => model.Activo)", render: function (data, type, row, meta) {
-                        return data == true ? 1 : 0;
+                        if (type === "display") {
+                            return data == true ? 1 : 0;
+                        }
+                        return data;
                     }
                 }
             ]
