@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ComponentModels\**" />
     <Compile Remove="Models\Clientes\**" />
     <Compile Remove="wwwroot\lib\font-awesome\**" />
+    <Content Remove="ComponentModels\**" />
     <Content Remove="Models\Clientes\**" />
     <Content Remove="wwwroot\lib\font-awesome\**" />
+    <EmbeddedResource Remove="ComponentModels\**" />
     <EmbeddedResource Remove="Models\Clientes\**" />
     <EmbeddedResource Remove="wwwroot\lib\font-awesome\**" />
+    <None Remove="ComponentModels\**" />
     <None Remove="Models\Clientes\**" />
     <None Remove="wwwroot\lib\font-awesome\**" />
   </ItemGroup>
@@ -38,7 +42,6 @@
     <None Remove="Models\ViewModel\Clientes\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ComponentModels\" />
     <Folder Include="wwwroot\lib\datatables\dist\css\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
     <Folder Include="wwwroot\lib\momentjs\dist\" />
