@@ -8,11 +8,11 @@ namespace Perius.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly HomeRepository _repositorio;
+        private readonly HomeRepository Repositorio;
 
         public HomeController()
         {
-            _repositorio = new HomeRepository();
+            Repositorio = new HomeRepository();
         }
 
         public IActionResult Index()
@@ -27,7 +27,7 @@ namespace Perius.Controllers
 
         public JsonResult ObtenerTablaEjemplo()
         {
-            List<ClienteViewModel>? listaClientes = _repositorio.ObtenerClientes();
+            List<ClienteViewModel>? listaClientes = Repositorio.ObtenerClientes();
             //TODO
             return Json(new { draw = 1, recordsFiltered = listaClientes.Count, recordsTotal = listaClientes.Count, data = listaClientes });
         }

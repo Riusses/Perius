@@ -38,6 +38,7 @@
     <None Remove="Models\ViewModel\Clientes\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ComponentModels\" />
     <Folder Include="wwwroot\lib\datatables\dist\css\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
     <Folder Include="wwwroot\lib\momentjs\dist\" />
