@@ -23,22 +23,38 @@
                 type: "POST",
                 datatype: "json",
                 //data: function (data) {
-                //    debugger;
-                //    data.parametros.nombre = $("#nombre").val();
                 //    return JSON.stringify(data);
                 //}
             },
             columns: [
                 { data: "idCliente", visible: false },
                 { data: "idTipoDocumento", visible: false },
-                { data: "nombre", title: '@Html.DisplayNameFor(model => model.Nombre)', title: "Nombre" },
-                { data: "primerApellido", title: '@Html.DisplayNameFor(model => model.PrimerApellido)' },
-                { data: "segundoApellido", title: '@Html.DisplayNameFor(model => model.SegundoApellido)' },
-                { data: "documento", title: '@Html.DisplayNameFor(model => model.Documento)' },
-                { data: "fechaAltaToString", title: '@Html.DisplayNameFor(model => model.FechaAlta)' },
-                { data: "fechaBajaToString", title: '@Html.DisplayNameFor(model => model.FechaBaja)' },
+                { data: "nombre", title: "@Html.DisplayNameFor(model => model.Nombre)", title: "Nombre" },
+                { data: "primerApellido", title: "@Html.DisplayNameFor(model => model.PrimerApellido)" },
+                { data: "segundoApellido", title: "@Html.DisplayNameFor(model => model.SegundoApellido)" },
+                { data: "documento", title: "@Html.DisplayNameFor(model => model.Documento)" },
                 {
-                    data: "activo", title: '@Html.DisplayNameFor(model => model.Activo)', render: function (data, type, row, meta) {
+                    data: "fechaAlta", title: "@Html.DisplayNameFor(model => model.FechaAlta)", render: function (data, type, row) {
+                        if (type === "display") {
+                            if (isNaN(data) && moment(data, moment(data, "YYYY-MM-DDTHH:mm:ss", true).isValid(), true).isValid()) {
+                                return moment(data).format("DD/MM/YYYY hh:mm");
+                            }
+                        }
+                        return data;
+                    }
+                },
+                {
+                    data: "fechaBaja", title: "@Html.DisplayNameFor(model => model.FechaBaja)", render: function (data, type, row) {
+                        if (type === "display") {
+                            if (isNaN(data) && moment(data, "YYYY-MM-DDTHH:mm:ss", true).isValid()) {
+                                return moment(data).format("DD/MM/YYYY hh:mm");
+                            }
+                        }
+                        return data;
+                    }
+                },
+                {
+                    data: "activo", title: "@Html.DisplayNameFor(model => model.Activo)", render: function (data, type, row, meta) {
                         return data == true ? 1 : 0;
                     }
                 }

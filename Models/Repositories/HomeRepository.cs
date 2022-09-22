@@ -1,7 +1,7 @@
-﻿using Perius.Models.Functions;
+﻿using Perius.Maps;
+using Perius.Models.Functions;
 using Perius.Models.ViewModels;
 using Perius.Models.ViewModels.Clientes;
-using Perius.Maps;
 
 namespace Perius.Models.Repositories
 {
@@ -16,7 +16,7 @@ namespace Perius.Models.Repositories
 
         public List<ClienteViewModel> ObtenerClientes()
         {
-            ParametrosConsultaViewModel parametrosConsulta = new("dbo.ObtenerClientes", typeof(ClienteViewModel));
+            ParametrosConsultaViewModel parametrosConsulta = new("dbo.ObtenerClientes");
             FuncionesDB.EjecutarStoredProcedure(parametrosConsulta);
             List<ClienteViewModel> resultados = modelMaps.MapClientes(parametrosConsulta.Resultados);
 
