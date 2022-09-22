@@ -21,10 +21,13 @@
             ajax: {
                 url: "/Home/ObtenerTablaEjemplo",
                 type: "POST",
-                datatype: "json",
-                //data: function (data) {
-                //    return JSON.stringify(data);
-                //}
+                contentType: "application/json; charset=utf-8",
+                data: function (data) {
+                    data.parametros = {
+                        Nombre: 'Jordi'
+                    }
+                    return JSON.stringify(data);
+                }
             },
             columns: [
                 { data: "idCliente", visible: false },

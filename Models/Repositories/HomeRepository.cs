@@ -14,13 +14,16 @@ namespace Perius.Models.Repositories
             modelMaps = new ModelMaps();
         }
 
-        public List<ClienteViewModel> ObtenerClientes()
+        public List<ClienteViewModel> ObtenerClientes(DTParameters parametros)
         {
+            string sortOrder = parametros.SortOrder;
+            //string nombre = parametros.CustomParameters.Nombre.Value;
+
             ParametrosConsultaViewModel parametrosConsulta = new("dbo.ObtenerClientes");
             FuncionesDB.EjecutarStoredProcedure(parametrosConsulta);
-            List<ClienteViewModel> resultados = modelMaps.MapClientes(parametrosConsulta.Resultados);
+            List<ClienteViewModel> clientes = modelMaps.MapClientes(parametrosConsulta.Resultados);
 
-            return resultados;
+            return clientes.Skip(parametros.Start).Take(parametros.Length).ToList();
         }
     }
 }

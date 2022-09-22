@@ -25,11 +25,20 @@ namespace Perius.Controllers
             return PartialView("_TablaEjemplo");
         }
 
-        public JsonResult ObtenerTablaEjemplo()
+        public JsonResult ObtenerTablaEjemplo([FromBody] DTParameters parametros)
         {
-            List<ClienteViewModel>? listaClientes = Repositorio.ObtenerClientes();
-            //TODO
-            return Json(new { draw = 1, recordsFiltered = listaClientes.Count, recordsTotal = listaClientes.Count, data = listaClientes });
+            List<ClienteViewModel> listaClientes = Repositorio.ObtenerClientes(parametros);
+
+            DTParameters resultado = new()
+            {
+                Draw = parametros.Draw,
+                Data = listaClientes,
+                RecordsFiltered = listaClientes.Count,
+                RecordsTotal = listaClientes.Count
+
+            };
+
+            return Json(resultado);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
