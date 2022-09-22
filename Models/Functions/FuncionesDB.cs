@@ -1,10 +1,9 @@
 ﻿using System.Data;
-using System.Reflection;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Perius.Models.ViewModels;
-using Perius.ComponentModels.CustomAttributes;
+using System.Dynamic;
 
 namespace Perius.Models.Functions
 {
@@ -47,20 +46,27 @@ namespace Perius.Models.Functions
 
             try
             {
-                using SqlDataReader reader = comando.ExecuteReader();
-                while (reader.Read())
+                using (SqlDataReader reader = comando.ExecuteReader())
                 {
-                    object? objetoModelo = Activator.CreateInstance(parametrosConsulta.Modelo);
-                    IEnumerable<PropertyInfo> propiedades = objetoModelo.GetType().GetProperties()
-                                                                        .Where(propiedad => propiedad.GetCustomAttributes(typeof(SkipAditionalPropertyAttribute), true).Length == 0
-                                                                                            && !Equals(reader[propiedad.Name], DBNull.Value));
-                    foreach (PropertyInfo propiedad in propiedades)
+                    List<string> campos = new();
+
+                    for (int i = 0; i < reader.FieldCount; i++)
                     {
-                        propiedad.SetValue(objetoModelo, reader[propiedad.Name], null);
+                        campos.Add(reader.GetName(i));
                     }
 
-                    listaObjetoModelo.Add(objetoModelo);
-                }
+                    while (reader.Read())
+                    {
+                        IDictionary<string, object> registro = new ExpandoObject();
+
+                        for (int i = 0; i < campos.Count; i++)
+                        {
+                            registro.Add(campos[i], reader[campos[i]]);
+                        };
+
+                        listaObjetoModelo.Add(registro);
+                    }
+                };
             }
             catch
             {

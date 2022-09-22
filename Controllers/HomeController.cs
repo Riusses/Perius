@@ -8,12 +8,10 @@ namespace Perius.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly HomeRepository _repositorio;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
             _repositorio = new HomeRepository();
         }
 
@@ -29,7 +27,8 @@ namespace Perius.Controllers
 
         public JsonResult ObtenerTablaEjemplo()
         {
-            List<ClienteViewModel> listaClientes = _repositorio.ObtenerClientes();
+            List<ClienteViewModel>? listaClientes = _repositorio.ObtenerClientes();
+            //TODO
             return Json(new { draw = 1, recordsFiltered = listaClientes.Count, recordsTotal = listaClientes.Count, data = listaClientes });
         }
 
