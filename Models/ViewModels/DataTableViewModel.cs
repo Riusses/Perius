@@ -55,19 +55,22 @@ namespace Perius.Models.ViewModels
         /// The total records from Data property.
         /// </summary>
         public int RecordsTotal { get; set; }
+
+
         [JsonProperty("parametros")]
         /// <summary>
         /// Custom parameters from any element of view.
         /// </summary>
         public List<dynamic>? CustomParameters { get; set; }
 
-        public string SortOrder
-        {
-            get
-            {
-                return "Nombre";
-            }
-        }
+        //[JsonProperty("sortOrder")]
+        //public string SortOrder
+        //{
+        //    get
+        //    {
+
+        //    }
+        //}
     }
 
     /// <summary>
