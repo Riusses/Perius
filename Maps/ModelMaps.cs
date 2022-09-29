@@ -7,7 +7,7 @@ namespace Perius.Maps
         #region Clientes
         public IQueryable<ClienteViewModel> MapClientes(List<dynamic>? clientes)
         {
-            // TODO UN TRY CATCH
+            // TODO BLINDAR
             return clientes.Select(x => new ClienteViewModel
             {
                 IdCliente = x.IdCliente.Equals(DBNull.Value) ? 0 : (int)x.IdCliente,

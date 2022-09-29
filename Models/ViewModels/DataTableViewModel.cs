@@ -63,14 +63,24 @@ namespace Perius.Models.ViewModels
         /// </summary>
         public List<dynamic>? CustomParameters { get; set; }
 
-        //[JsonProperty("sortOrder")]
-        //public string SortOrder
-        //{
-        //    get
-        //    {
+        [JsonProperty("sortOrder")]
+        public string SortOrder
+        {
+            get
+            {
+                // TODO BLINDAR
+                string orderBy = string.Empty;
 
-        //    }
-        //}
+                if (Columns != null)
+                {
+                    DTOrder order = Order.First();
+                    List<DTColumn> dTColumns = Columns.ToList();
+                    orderBy = dTColumns[order.Column].Data + " " + order.Dir;
+                }
+
+                return orderBy;
+            }
+        }
     }
 
     /// <summary>
